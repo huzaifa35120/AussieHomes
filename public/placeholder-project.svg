@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#f3f4f6"/>
+  <rect x="300" y="150" width="200" height="200" rx="4" fill="#e5e7eb"/>
+  <polygon points="300,200 400,120 500,200" fill="#d1d5db"/>
+  <rect x="345" y="230" width="50" height="70" fill="#9ca3af"/>
+  <rect x="415" y="220" width="35" height="35" fill="#d1d5db"/>
+  <rect x="425" y="230" width="15" height="15" fill="#e5e7eb"/>
+  <text x="400" y="390" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#9ca3af">Project Image</text>
+</svg>
