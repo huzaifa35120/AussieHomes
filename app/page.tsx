@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, CheckCircle, Home, Wrench, Building2, Star, Phone, Award, Users, Clock } from 'lucide-react'
+import { ArrowRight, CheckCircle, Home, Wrench, Building2, Star, Phone, Award, Users, Clock, Warehouse } from 'lucide-react'
 import { createServerSupabaseClient } from '@/lib/supabase-server'
 import { getSiteSettings } from '@/lib/settings'
 import { telHref } from '@/lib/utils'
@@ -49,6 +49,12 @@ const services = [
     title: 'Knockdown Rebuild',
     desc: 'Maximise the potential of your land by replacing your old home with a brand-new, modern masterpiece.',
     href: '/services#knockdown-rebuild',
+  },
+  {
+    icon: Warehouse,
+    title: 'Granny Flats',
+    desc: 'Add a stylish, self-contained secondary dwelling — perfect for family, rental income, or a private retreat.',
+    href: '/services#granny-flats',
   },
 ]
 

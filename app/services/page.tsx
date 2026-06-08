@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, CheckCircle, Home, Wrench, Building2, Ruler, HardHat, TreePine } from 'lucide-react'
+import { ArrowRight, CheckCircle, Home, Wrench, Building2, Ruler, HardHat, TreePine, Warehouse } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Services',
@@ -64,6 +64,25 @@ const services = [
     process: ['Feasibility Check', 'Demolition', 'Design & DA', 'Construction', 'Landscaping', 'Move In'],
     color: 'bg-orange-50',
     accent: 'text-orange-600',
+  },
+  {
+    id: 'granny-flats',
+    icon: Warehouse,
+    title: 'Granny Flats',
+    subtitle: 'Smart, self-contained living spaces',
+    description:
+      'Add value to your property and create flexible living space with a custom-built granny flat. Perfect for extended family, rental income, or a private home office. Auzi Homes delivers compliant, high-quality secondary dwellings from design to completion.',
+    features: [
+      'Custom design to suit your block',
+      'CDC and DA approval management',
+      'One and two bedroom layouts',
+      'Full kitchen and bathroom fit-out',
+      'Energy-efficient construction',
+      'Driveway, fencing and landscaping',
+    ],
+    process: ['Site Assessment', 'Design & Quote', 'Approvals', 'Construction', 'Finishing', 'Handover'],
+    color: 'bg-purple-50',
+    accent: 'text-purple-600',
   },
 ]
 

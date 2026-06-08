@@ -89,6 +89,7 @@ export default function Footer({ settings }: { settings: SiteSettings }) {
                 'New Home Builds',
                 'Renovations & Extensions',
                 'Knockdown Rebuild',
+                'Granny Flats',
                 'Structural Work',
                 'Project Management',
               ].map((s) => (
