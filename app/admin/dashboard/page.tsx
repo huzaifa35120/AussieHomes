@@ -75,7 +75,7 @@ export default function AdminDashboard() {
       <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Image src="/logo.svg" alt="Auzi Homes" width={140} height={36} className="h-9 w-auto" />
+            <Image src="/logo.png" alt="Auzi Homes" width={140} height={36} className="h-9 w-auto" />
             <span className="text-xs bg-[#C0392B] text-white px-2 py-0.5 rounded font-semibold">Admin</span>
           </div>
           <div className="flex items-center gap-3">

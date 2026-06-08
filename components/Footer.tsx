@@ -32,7 +32,7 @@ export default function Footer({ settings }: { settings: SiteSettings }) {
           {/* Brand */}
           <div className="md:col-span-1">
             <Image
-              src="/logo.svg"
+              src="/logo.png"
               alt={settings.company_name}
               width={180}
               height={48}

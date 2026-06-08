@@ -66,15 +66,18 @@ export default function Navbar({ settings }: { settings: SiteSettings }) {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center gap-3">
               <Image
-                src="/logo.svg"
+                src="/logo.png"
                 alt={settings.company_name}
                 width={200}
                 height={52}
                 className="h-10 md:h-12 w-auto"
                 priority
               />
+              <span className="text-xl md:text-2xl font-bold text-[#C0392B] tracking-wide whitespace-nowrap">
+                AUZI HOMES
+              </span>
             </Link>
 
             {/* Desktop nav */}

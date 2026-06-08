@@ -143,7 +143,7 @@ export default function AdminSettingsPage() {
               <ArrowLeft size={15} /> Dashboard
             </Link>
             <span className="text-gray-300">|</span>
-            <Image src="/logo.svg" alt="Auzi Homes" width={120} height={32} className="h-8 w-auto" />
+            <Image src="/logo.png" alt="Auzi Homes" width={120} height={32} className="h-8 w-auto" />
             <span className="text-xs bg-[#C0392B] text-white px-2 py-0.5 rounded font-semibold">
               Settings
             </span>

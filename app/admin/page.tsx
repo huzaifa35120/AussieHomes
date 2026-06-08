@@ -40,7 +40,7 @@ export default function AdminLoginPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <Image
-            src="/logo.svg"
+            src="/logo.png"
             alt="Auzi Homes"
             width={200}
             height={52}
