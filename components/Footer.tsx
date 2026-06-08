@@ -31,13 +31,18 @@ export default function Footer({ settings }: { settings: SiteSettings }) {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-1">
-            <Image
-              src="/logo.png"
-              alt={settings.company_name}
-              width={180}
-              height={48}
-              className="h-12 w-auto brightness-0 invert mb-4"
-            />
+            <div className="flex items-center gap-3 mb-4">
+              <Image
+                src="/logo.png"
+                alt={settings.company_name}
+                width={180}
+                height={48}
+                className="h-12 w-auto"
+              />
+              <span className="text-xl font-bold text-white tracking-wide whitespace-nowrap">
+                AUZI HOMES
+              </span>
+            </div>
             <p className="text-gray-400 text-sm leading-relaxed">
               {settings.tagline}. Sydney&apos;s trusted construction specialists for over a decade.
             </p>
