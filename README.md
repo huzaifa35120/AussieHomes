@@ -41,14 +41,33 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
 SUPABASE_SERVICE_ROLE_KEY=eyJ...
 ```
 
-### Step 4 – Create Admin User
+### Step 4 – Enquiry Email Notifications
+
+Contact-form enquiries are always saved to Supabase and visible in the admin
+dashboard. To also get them emailed to you:
+
+1. Sign up free at [resend.com](https://resend.com) — use the inbox you want
+   enquiries delivered to
+2. **API Keys → Create API Key**, then put it in `.env.local` as `RESEND_API_KEY`
+3. Set `CONTACT_EMAIL` to the destination inbox
+4. To send from your own domain, add `auzihomes.com.au` under **Domains** in
+   Resend, add the DNS records it gives you, then set
+   `RESEND_FROM="Auzi Homes <enquiries@auzihomes.com.au>"`
+
+Until the domain is verified, `onboarding@resend.dev` works but can **only**
+deliver to the address you registered with Resend.
+
+If `RESEND_API_KEY` is empty the form still works — the enquiry is saved and the
+visitor sees a success message; only the email notification is skipped.
+
+### Step 5 – Create Admin User
 
 1. In Supabase → **Authentication → Users**
 2. Click **"Add User"** → **"Create new user"**
 3. Enter an email and password for your admin (e.g. `admin@auzihomes.com.au`)
 4. This is the login you'll use at `/admin`
 
-### Step 5 – Add Your Logo
+### Step 6 – Add Your Logo
 
 Replace `/public/logo.svg` with your actual logo file. The logo from the business card works best as a PNG at ~400×100px. Name it `logo.png` and update the `src` in:
 - `components/Navbar.tsx` → change `/logo.svg` to `/logo.png`
@@ -56,7 +75,7 @@ Replace `/public/logo.svg` with your actual logo file. The logo from the busines
 - `app/admin/page.tsx` → change `/logo.svg` to `/logo.png`
 - `app/admin/dashboard/page.tsx` → change `/logo.svg` to `/logo.png`
 
-### Step 6 – Run Locally
+### Step 7 – Run Locally
 
 ```bash
 npm run dev

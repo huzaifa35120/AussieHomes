@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS site_settings (
   acn                    TEXT NOT NULL DEFAULT '673 861 893',
   phone_mobile           TEXT NOT NULL DEFAULT '0424 870 667',
   phone_office           TEXT NOT NULL DEFAULT '',
-  email                  TEXT NOT NULL DEFAULT 'info@auzihomes.com.au',
+  email                  TEXT NOT NULL DEFAULT 'auzihomes@gmail.com',
   address_short          TEXT NOT NULL DEFAULT 'Sydney, NSW, Australia',
   address_service_area   TEXT NOT NULL DEFAULT 'Servicing all of Greater Sydney',
   business_hours_weekday TEXT NOT NULL DEFAULT 'Mon – Fri: 7am – 6pm',

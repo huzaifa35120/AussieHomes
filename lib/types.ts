@@ -75,7 +75,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   acn: '673 861 893',
   phone_mobile: '0424 870 667',
   phone_office: '',
-  email: 'info@auzihomes.com.au',
+  email: 'auzihomes@gmail.com',
   address_short: 'Sydney, NSW, Australia',
   address_service_area: 'Servicing all of Greater Sydney',
   business_hours_weekday: 'Mon – Fri: 7am – 6pm',

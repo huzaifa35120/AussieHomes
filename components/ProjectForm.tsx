@@ -58,10 +58,13 @@ export default function ProjectForm({ initialData, mode }: ProjectFormProps) {
       : INITIAL_FORM
   )
   const [uploading, setUploading] = useState(false)
+  const [videoUploading, setVideoUploading] = useState(false)
+  const [videoError, setVideoError] = useState('')
   const [saving, setSaving] = useState(false)
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const videoInputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
   const handleChange = (
@@ -102,6 +105,49 @@ export default function ProjectForm({ initialData, mode }: ProjectFormProps) {
 
     setForm((prev) => ({ ...prev, images: [...prev.images, ...uploaded] }))
     setUploading(false)
+  }
+
+  const MAX_VIDEO_BYTES = 50 * 1024 * 1024
+
+  const handleVideoUpload = async (file: File) => {
+    setVideoError('')
+
+    if (file.size > MAX_VIDEO_BYTES) {
+      setVideoError(
+        `That file is ${(file.size / 1024 / 1024).toFixed(0)}MB. The limit is 50MB \u2013 please compress it or upload a shorter clip.`
+      )
+      return
+    }
+
+    setVideoUploading(true)
+    const supabase = createClient()
+    const ext = file.name.split('.').pop()
+    const fileName = `videos/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`
+
+    const { data, error } = await supabase.storage
+      .from('project-images')
+      .upload(fileName, file, {
+        cacheControl: '3600',
+        upsert: false,
+        contentType: file.type,
+      })
+
+    if (error || !data) {
+      setVideoError(error?.message || 'Upload failed. Please try again.')
+    } else {
+      const { data: urlData } = supabase.storage
+        .from('project-images')
+        .getPublicUrl(data.path)
+      setForm((prev) => ({ ...prev, video_url: urlData.publicUrl }))
+    }
+
+    setVideoUploading(false)
+  }
+
+  const removeVideo = () => {
+    setForm((prev) => ({ ...prev, video_url: null }))
+    setVideoError('')
+    if (videoInputRef.current) videoInputRef.current.value = ''
   }
 
   const removeImage = async (url: string, index: number) => {
@@ -163,7 +209,7 @@ export default function ProjectForm({ initialData, mode }: ProjectFormProps) {
           <button
             form="project-form"
             type="submit"
-            disabled={saving || uploading}
+            disabled={saving || uploading || videoUploading}
             className="btn-primary py-2 text-sm disabled:opacity-60"
           >
             {saving ? (
@@ -428,14 +474,61 @@ export default function ProjectForm({ initialData, mode }: ProjectFormProps) {
           {/* Video */}
           <div className="bg-white rounded-xl p-6 border border-gray-200">
             <h2 className="font-bold text-gray-900 mb-2 font-heading">Project Video</h2>
-            <p className="text-gray-500 text-sm mb-4">Optional. Paste a YouTube or Vimeo URL.</p>
+            <p className="text-gray-500 text-sm mb-5">
+              Optional. Upload a video of the project. MP4, WEBM or MOV up to 50MB.
+            </p>
+
+            {form.video_url ? (
+              <div className="space-y-3">
+                <video
+                  key={form.video_url}
+                  src={form.video_url}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  className="w-full max-h-80 rounded-xl bg-black"
+                />
+                <button
+                  type="button"
+                  onClick={removeVideo}
+                  className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-red-600 transition-colors"
+                >
+                  <X size={14} /> Remove video
+                </button>
+              </div>
+            ) : (
+              <div
+                onClick={() => !videoUploading && videoInputRef.current?.click()}
+                className="border-2 border-dashed border-gray-300 hover:border-[#C0392B] rounded-xl p-8 text-center cursor-pointer transition-colors"
+              >
+                {videoUploading ? (
+                  <div className="flex flex-col items-center gap-2 text-gray-500">
+                    <Loader2 size={28} className="animate-spin text-[#C0392B]" />
+                    <p className="text-sm">Uploading video...</p>
+                    <p className="text-xs">Large files can take a minute. Please don&apos;t close this page.</p>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center gap-2 text-gray-400">
+                    <Upload size={28} />
+                    <p className="text-sm font-medium text-gray-600">Click to upload a video</p>
+                    <p className="text-xs">MP4, WEBM, MOV up to 50MB</p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {videoError && (
+              <p className="mt-3 flex items-start gap-1.5 text-sm text-red-600">
+                <AlertCircle size={14} className="shrink-0 mt-0.5" /> {videoError}
+              </p>
+            )}
+
             <input
-              name="video_url"
-              type="url"
-              value={form.video_url ?? ''}
-              onChange={handleChange}
-              placeholder="https://www.youtube.com/watch?v=..."
-              className="input-field"
+              ref={videoInputRef}
+              type="file"
+              accept="video/mp4,video/webm,video/quicktime"
+              className="hidden"
+              onChange={(e) => e.target.files?.[0] && handleVideoUpload(e.target.files[0])}
             />
           </div>
 
@@ -443,7 +536,7 @@ export default function ProjectForm({ initialData, mode }: ProjectFormProps) {
           <div className="flex justify-end pb-8">
             <button
               type="submit"
-              disabled={saving || uploading}
+              disabled={saving || uploading || videoUploading}
               className="btn-primary text-base px-8 py-3.5 disabled:opacity-60"
             >
               {saving ? (
